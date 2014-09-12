@@ -52,7 +52,7 @@ void setup()
 	d0 = new Die(20,20,60);
 	d1 = new Die(120,20,60);
 	d2 = new Die(220,20,60);*/
-	init_size_and_dice(800,500,16,2);
+	init_size_and_dice(1024,768,16,2);
 
 	noLoop();
 }
