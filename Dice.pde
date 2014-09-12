@@ -40,7 +40,7 @@ PFont f;
  Die[] die_array;
 
 int s_to_dice_num;
-int text_height_val = 8;
+int text_height_val = 12;
 int text_out_y = 0;
 int text_out_x = 0;
 
