@@ -56,31 +56,21 @@ PFont f;
  Die[] die_array;
 
 int s_to_dice_num;
-int text_height_val = 20;
+int text_height_val = 4;
 int text_out_y = 0;
 int text_out_x = 0;
 
 public void setup()
 {
-	textSize(18);
+	textSize(12);
 	f = createFont("Arial",16,true); 
-	/*size(300,128);
-	d0 = new Die(20,20,60);
-	d1 = new Die(120,20,60);
-	d2 = new Die(220,20,60);*/
-	init_size_and_dice(1024,768,16,2);
+	init_size_and_dice(1024,768,16,0);
 
 	noLoop();
 }
 public void draw()
 {
 	background(0);
-	/*d0.roll();
-	d1.roll();
-	d2.roll();
-	d0.show();
-	d1.show();
-	d2.show();*/
 	roll_show_all_dice();
 
 }
@@ -104,12 +94,11 @@ class Die //models one single dice cube
 		Die_dot_bits = 0;
 		Die_val = 0;
 		Die_width = w_h;
-		Die_dot_width = (((w_h>>2)>>2)*3);
+		Die_dot_width = (((w_h>>3)));//>>2)*3);
 	}
 	public void roll()
 	{
 		//your code here
-
 		Die_val = (int)((Math.random()*6)+1);
 
 	}
@@ -118,7 +107,6 @@ class Die //models one single dice cube
 		//your code here
 		fill(255);
 		rect(corner_x, corner_y, Die_width, Die_width);
-
 
 		Die_dot_bits = die_bits[Die_val];
 
@@ -139,8 +127,6 @@ class Die //models one single dice cube
 			ellipse(corner_x+((Die_width>>2)), corner_y+(Die_width>>1), Die_dot_width, Die_dot_width);
 			ellipse(corner_x+((Die_width>>2)*3), corner_y+(Die_width>>1), Die_dot_width, Die_dot_width);
 		}
-
-
 	}
 }
 
@@ -163,36 +149,25 @@ public void init_size_and_dice(int s_width, int s_height, int d_w_h, int d_space
 		for(int d_x=0;d_x<s_dice_grid_w;d_x++){
 			d_x_cor = d_x*(d_w_h+d_space);
 
-			
-
-
 			die_array[d_cnt] = new Die(d_x_cor,d_y_cor,d_w_h);
 			d_cnt++;
-
 		}
-
 	}
-
-
 }
 
 public void roll_show_all_dice(){
 	int roll_total_r=0;
 	for(int d_i=0;d_i<(die_array.length-1) ; d_i++){
-
-  //textFont(f);
 		die_array[d_i].roll();
 		die_array[d_i].show();
 
 		roll_total_r += die_array[d_i].Die_val;
-
-  //textFont(f);
-		
 	}
 fill(255);
 		char out_total_num_text = PApplet.parseChar(roll_total_r);
 		//text(out_total_num_text,text_out_x,text_out_y);
 		text("total : "  + roll_total_r, text_out_x-80,text_out_y);
+		text("# dice: " + s_to_dice_num, text_out_x + 80,text_out_y);
 
 }
   static public void main(String[] passedArgs) {
