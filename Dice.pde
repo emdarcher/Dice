@@ -29,19 +29,44 @@ byte[] die_bits = {
 	(byte)0x0E,//0b1110;
 };
 
-Die thing1;
+
+PFont f;
+//Die d0,d1,d2;
+
+//Die[] die_array = new Die[]
+
+//int number_of_dice = 3;
+//Die[] die_array = new Die [number_of_dice+1];
+ Die[] die_array;
+
+int s_to_dice_num;
+int text_height_val = 20;
+int text_out_y = 0;
+int text_out_x = 0;
 
 void setup()
 {
-	size(127,127);
-	thing1 = new Die(20,20);
+	textSize(18);
+	f = createFont("Arial",16,true); 
+	/*size(300,128);
+	d0 = new Die(20,20,60);
+	d1 = new Die(120,20,60);
+	d2 = new Die(220,20,60);*/
+	init_size_and_dice(800,500,16,2);
+
 	noLoop();
 }
 void draw()
 {
 	background(0);
-	thing1.roll();
-	thing1.show();
+	/*d0.roll();
+	d1.roll();
+	d2.roll();
+	d0.show();
+	d1.show();
+	d2.show();*/
+	roll_show_all_dice();
+
 }
 void mousePressed()
 {
@@ -55,15 +80,15 @@ class Die //models one single dice cube
 	int Die_width;
 	int Die_dot_width;
 	//variable declarations here
-	Die(int x, int y) //constructor
+	Die(int x, int y, int w_h) //constructor
 	{
 		//variable initializations here
 		corner_x = x;
 		corner_y = y;
 		Die_dot_bits = 0;
 		Die_val = 0;
-		Die_width = 60;
-		Die_dot_width = 15;
+		Die_width = w_h;
+		Die_dot_width = (((w_h>>2)>>2)*3);
 	}
 	void roll()
 	{
@@ -101,4 +126,56 @@ class Die //models one single dice cube
 
 
 	}
+}
+
+void init_size_and_dice(int s_width, int s_height, int d_w_h, int d_space){
+
+	size(s_width,s_height + text_height_val);
+	text_out_x = (s_width>>1);
+	text_out_y = s_height + text_height_val;
+	int s_dice_grid_h = s_height/(d_w_h+d_space);
+	int s_dice_grid_w = s_width/(d_w_h+d_space);
+	s_to_dice_num = (s_dice_grid_w * s_dice_grid_h);
+	die_array = new Die [s_to_dice_num+1];
+	int d_cnt = 0;
+	int d_y_cor = 0;
+	int d_x_cor = 0;
+
+	for(int d_y=0;d_y<s_dice_grid_h;d_y++){
+		d_y_cor = d_y*(d_w_h+d_space);
+
+		for(int d_x=0;d_x<s_dice_grid_w;d_x++){
+			d_x_cor = d_x*(d_w_h+d_space);
+
+			
+
+
+			die_array[d_cnt] = new Die(d_x_cor,d_y_cor,d_w_h);
+			d_cnt++;
+
+		}
+
+	}
+
+
+}
+
+void roll_show_all_dice(){
+	int roll_total_r=0;
+	for(int d_i=0;d_i<(die_array.length-1) ; d_i++){
+
+  //textFont(f);
+		die_array[d_i].roll();
+		die_array[d_i].show();
+
+		roll_total_r += die_array[d_i].Die_val;
+
+  //textFont(f);
+		
+	}
+fill(255);
+		char out_total_num_text = char(roll_total_r);
+		//text(out_total_num_text,text_out_x,text_out_y);
+		text("total : "  + roll_total_r, text_out_x-80,text_out_y);
+
 }
