@@ -1,0 +1,49 @@
+ Dice
+
+In this assignment we'll practice using OOP (Object Oriented Programming) techniques. We'll create a class to model what a single die has and does, and then we will create two or more instances of that class. Note that for full credit your program must display the total of the dice and draw the dice with dots or similar marks.
+Go to https://github.com/LowellSampleClass/Dice and fork and clone down the repository. Open the pde file and you should see the following code:
+ 
+void setup()
+{
+    noLoop();
+}
+void draw()
+{
+    
+}
+void mousePressed()
+{
+    redraw();
+}
+class Die //models one single dice cube
+{
+    //variable declarations here
+    Die(int x, int y) //constructor
+    {
+        //variable initializations here
+    }
+    void roll()
+    {
+        //your code here
+    }
+    void show()
+    {
+        //your code here
+    }
+}
+ 
+ 
+Complete the draw() function first. If it is the first time the screen is drawn or if the mouse has been pressed:
+
+    clear the screen
+    declare and initialize two instance of the Die class
+    display the two instances of the Die class
+
+Now complete the Die class. You will need to complete the show() function that displays the die to the screen. Notice that the constructor takes arguments. We'll use those arguments to position each of the dice. Don't worry about the dots at first, just get the shape of the dice on the screen for now. Once you like the shape of your die, go back to show() and add some ifs to check how many dots you need to put on the die. Start by "forcing" the die to always roll a one. Check to see that you can get one dot where it is suppose to be, and move on to two. If you are clever, you can combine some of the ifs and avoid duplicate code. Finally, your program will display the total for the roll to the screen.
+ 
+Have fun and be creative. Your dice program doesn't have to look or work like any other.  
+ 
+Optional Extras
+ 
+Feel free to customize index.html. If you have extra time, you can keep track of the rolls. You could display the average roll, or maybe a graph that shows how often each of the numbers from 2 to 12 have come up. This is useful in some dice games like Settlers of Catan. I'll give extra credit to the student in each class who can make the largest number of legible dice along with the total visual at one time on my monitor (the resolution of my monitor is 1024 x 768). Check the links below for examples of other students work
+
